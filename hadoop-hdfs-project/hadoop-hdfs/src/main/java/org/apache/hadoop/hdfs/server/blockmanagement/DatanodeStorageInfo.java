@@ -238,7 +238,7 @@ public class DatanodeStorageInfo {
         return AddBlockResult.ALREADY_EXIST;
       }
     }
-
+    // 更新块汇报的dn 信息到BlockInfo对象中
     b.addStorage(this, reportedBlock);
     blocks.addSortedLast(b);
     return result;
@@ -248,6 +248,7 @@ public class DatanodeStorageInfo {
     // First check whether the block belongs to a different storage
     // on the same DN.
     AddBlockResult result = AddBlockResult.ADDED;
+    // 检查这个块是否处于同一个Dn上的另一个存储
     DatanodeStorageInfo otherStorage =
         b.findStorageInfo(getDatanodeDescriptor());
 
@@ -258,11 +259,13 @@ public class DatanodeStorageInfo {
         result = AddBlockResult.REPLACED;
       } else {
         // The block is already associated with this storage.
+        // 如果数据库已经添加到了当前存储上，不需要再次添加
         return AddBlockResult.ALREADY_EXIST;
       }
     }
-
+    // 首先将当前存储添加到数据库所属的存储列表中
     b.addStorage(this, reportedBlock);
+    // 之后把当前数据块添加到管理数据块的FoldedTreeSet 中
     blocks.add(b);
     return result;
   }

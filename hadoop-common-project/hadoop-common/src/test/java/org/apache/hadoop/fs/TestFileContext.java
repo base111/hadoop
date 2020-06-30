@@ -48,7 +48,8 @@ public class TestFileContext {
   public void testConfBasedAndAPIBasedSetUMask() throws Exception {
 
     Configuration conf = new Configuration();
-
+    FileSystem fs = FileSystem.get(conf);
+    fs.open()
     String defaultlUMask =
         conf.get(CommonConfigurationKeys.FS_PERMISSIONS_UMASK_KEY);
     assertEquals("Default UMask changed!", "022", defaultlUMask);

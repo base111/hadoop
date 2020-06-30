@@ -765,7 +765,7 @@ class BlockSender implements java.io.Closeable {
    *        sending the data, e.g. 
    *        {@link SocketOutputStream#transferToFully(FileChannel, 
    *        long, int)}.
-   * @param throttler for sending data.
+   * @param throtTestDFSIOtler for sending data.
    * @return total bytes read, including checksum data.
    */
   long sendBlock(DataOutputStream out, OutputStream baseStream, 
